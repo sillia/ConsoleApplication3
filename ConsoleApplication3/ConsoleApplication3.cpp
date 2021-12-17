@@ -70,8 +70,8 @@ void print(tqueue** head) {
 
 	tqueue* tmp = *head;;
 	while (tmp != NULL) {
-		cout << "||" << (*tmp).val << "||" << '\n';
-
+		//cout << "||" << (*tmp).val << "||" << '\n';
+		printf(" %5d", (*tmp).val);
 		//tmp = head;
 		tmp = (*tmp).next;
 
