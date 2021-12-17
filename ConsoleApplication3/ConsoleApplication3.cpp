@@ -49,7 +49,7 @@ void max_first(tqueue** head) {
 	}
 	else if (pretmp == NULL) //max second
 	{
-		//надо дописать
+		//надо дописать для этого случая
 
 
 	}
