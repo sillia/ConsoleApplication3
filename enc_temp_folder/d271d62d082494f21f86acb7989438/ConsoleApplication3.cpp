@@ -64,6 +64,9 @@ void max_first(tqueue** head) {
 		//(*head)->next = temp;
 	}
 
+	//kjhkjghhjlkj
+
+
 }
 
 void print(tqueue** head) {
