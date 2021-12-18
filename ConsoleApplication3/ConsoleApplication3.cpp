@@ -3,15 +3,14 @@
 using namespace std;
 
 
-struct tqueue {
-	int    val;
+struct tqueue { //type queue
+	int    data;
 	tqueue* next;
 };
 
-
 void push(tqueue** head, tqueue** tail, int val) {
 	tqueue* ptr = new tqueue();
-	(*ptr).val = val;
+	(*ptr).data = val;
 	(*ptr).next = NULL;
 
 	if (*head == NULL)
@@ -22,45 +21,43 @@ void push(tqueue** head, tqueue** tail, int val) {
 	}
 }
 
-
-void max_first(tqueue** head) {
-	tqueue* tmp = *head;
-	tqueue* pretmp = NULL;
-	tqueue* preiter = *head;
+void set_max_first(tqueue** head) {
+	tqueue* max = *head;     //елемент з максимальним значенням
+	tqueue* premax = NULL;   //елемент перед максимальним
+	tqueue* preiter = *head; //тимчасове звереження попереднього елемента в циклі
 
 	bool flag = false;
 
 	for (tqueue* iter = *head; iter != NULL; iter = (*iter).next) {
-		if ((*iter).val > (*tmp).val) {
-			//pretmp = tmp;
+		if ((*iter).data > (*max).data) {
+			//premax = tmp;
 			flag = true;
-			tmp = iter;
+			max = iter;
 		}
 
 		if (flag)
 		{
-			pretmp = preiter;
+			premax = preiter;
 			flag = false;
 		}
 		preiter = iter;
 	}
-	if (tmp == *head) //alredy first
+	if (max == *head) //alredy first
 	{
 	}
-	else if (pretmp == NULL) //max second
-	{
-		//надо дописать для этого случая
-		//фваываыв
-
-	}
+	//else if (premax == NULL) //max second
+	//{
+	//	tqueue* temp = max;
+	//	(*max).next = *head;
+	//	*head = max;
+	//	(*head)->next = temp;
+	//}
 	else {
-		/*int  val = (*tmp).val;
-		(*tmp).val = (*head)->val;
-		(*head)->val = val;*/
-		tqueue* temp = tmp;
-		(*pretmp).next = (*tmp).next;
-		(*tmp).next = *head;
-		*head = tmp;
+	
+		//tqueue* temp = max;
+		(*premax).next = (*max).next;
+		(*max).next = *head;
+		*head = max;
 		//(*head)->next = temp;
 	}
 
@@ -70,8 +67,8 @@ void print(tqueue** head) {
 
 	tqueue* tmp = *head;;
 	while (tmp != NULL) {
-		//cout << "||" << (*tmp).val << "||" << '\n';
-		printf(" %5d", (*tmp).val);
+		//cout << "||" << (*tmp).data << "||" << '\n';
+		printf(" %5d", (*tmp).data);
 		//tmp = head;
 		tmp = (*tmp).next;
 
@@ -79,24 +76,29 @@ void print(tqueue** head) {
 	cout << endl;
 }
 
-
 void start() {
 
 	tqueue* head = NULL, * tail = NULL;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 		push(&head, &tail, -50 + rand() % (100));
-	print(&head);
-	max_first(&head);
-	print(&head);
+	
+	/*push(&head, &tail, 5);
+	push(&head, &tail, 40);
+	push(&head, &tail, 4);
+	push(&head, &tail, 10);*/
+
+	print(&head);	//до переміщення
+	set_max_first(&head);
+	print(&head);	//після переміщення
 	//tqueue* tmp;
 	//while (head != NULL) {
-	//	cout << "||" << (*head).val << "||" << '\n';
+	//	cout << "||" << (*head).data << "||" << '\n';
 
 	//	//tmp = head;
 	//	head = (*head).next;
 	//	//delete tmp;
 	//}
-	_getch(); //??
+	_getch(); //чекаємо натиснення будь-якої клавіші.
 }
 
 int main(void) {
