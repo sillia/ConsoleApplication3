@@ -8,9 +8,9 @@ struct tqueue { //type queue
 	tqueue* next;
 };
 
-void push(tqueue** head, tqueue** tail, int val) {
+void push(tqueue** head, tqueue** tail, int data) {
 	tqueue* ptr = new tqueue();
-	(*ptr).data = val;
+	(*ptr).data = data;
 	(*ptr).next = NULL;
 
 	if (*head == NULL)
